@@ -4,3 +4,5 @@
 * https://www.freecodecamp.org/learn/
 
 * https://cheerio.js.org/
+
+* https://javascript.info/
