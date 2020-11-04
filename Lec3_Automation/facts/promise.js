@@ -30,3 +30,4 @@ pendingPromise.catch( function (error) {
     console.log(pendingPromise);
     console.log(error);
 });
+
