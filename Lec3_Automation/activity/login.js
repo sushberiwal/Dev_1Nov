@@ -87,6 +87,7 @@ browserPendingPromise
     // loop 
     let oneQuestionSolvedPromise = solveOneQuestion(completeLinks[0]);
     return oneQuestionSolvedPromise;
+    
   })
   .then(function () {
     console.log("One Question solved !!");
