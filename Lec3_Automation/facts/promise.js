@@ -25,7 +25,7 @@ pendingPromise.then( function (data) {
     console.log(pendingPromise);
   console.log("Content = " + data);
 });
-pendingPromise.catch(function (error) {
+pendingPromise.catch( function (error) {
     console.log("inside catch");
     console.log(pendingPromise);
     console.log(error);
