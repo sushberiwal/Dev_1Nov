@@ -8,7 +8,9 @@ let fs = require("fs");
 
 // IIFE => immediately invoked function expressions 
 
-(async function(){
+console.log("start");
+
+let result = (async function(){
     try{
         // API
         let file1Data = fs.promises.readFile("./f1.txt"); 
@@ -21,3 +23,6 @@ let fs = require("fs");
     }
 })();
 
+console.log(result);
+
+console.log("end");
