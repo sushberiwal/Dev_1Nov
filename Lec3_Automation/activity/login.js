@@ -78,7 +78,7 @@ browserPendingPromise
     //       return "https://www.hackerrank.com"+link;
     //   });
     //   console.log(completeLinks);
-
+    
     let completeLinks = [];
     for (let i = 0; i < allLinks.length; i++) {
       let completLink = "https://www.hackerrank.com" + allLinks[i];
