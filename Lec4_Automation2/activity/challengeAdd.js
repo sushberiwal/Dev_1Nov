@@ -1,10 +1,7 @@
 const puppeteer = require("puppeteer");
-
 const challenges = require("./challenges");
-
 const id = "goxedev915@soowz.com";
 const pw = "12345678";
-
 
 let tab;
 // open a browser instance
@@ -21,9 +18,7 @@ let tab;
     await page.goto("https://www.hackerrank.com/auth/login");
     await page.type("#input-1", id);
     await page.type("#input-2", pw);
-
     // navigation happens with this click(); , i can wait for navigation
-    
     // wait for navigation and click , both runs parallely , promise.all checks if both the promises have been resolved
     await Promise.all([page.waitForNavigation({waitUntil : "networkidle0"}),page.click(".ui-btn.ui-btn-large.ui-btn-primary.auth-button")  ] );
     await page.waitForSelector('a[data-analytics="NavBarProfileDropDown"]' , {visible:true});
