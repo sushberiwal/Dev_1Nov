@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+}
+
+
+html,body{
+    padding:0px;
+    margin:0px;
+}
+
+
+.menu{
+    border: 1px solid;
+    height: 40px;
+}
+
+
+.menu-options{
+    border: 1px solid;
+    height: 60px;
+}
+
+
+.formula-input{
+    border: 1px solid;
+    height: 40px;
+}
+
+.cells{
+    border: 1px solid;
+    height: calc(100vh - 170px);
+    background: lightgreen;
+    overflow: auto;
+}
+
+
+.sheets{
+    border: 1px solid;
+    height: 30px;
+}
+
+.row{
+    display: flex;
+}
+
+.cell{
+    border: 1px solid;
+    min-height: 25px;
+    min-width: 70px;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="menu">Menu</div>
+
+    <div class="menu-options">Menu-options</div>
+
+    <div class="formula-input">Formula</div>
+
+    <div class="cells">
+
+        <% for(let i=0 ; i<100 ; i++){%>
+            <div class="row">
+                <%for(let j=0 ; j<26 ; j++) {%>
+                    <div class="cell">Cell</div>
+                <%}%>
+            </div>
+        <%}%>
+
+    </div>
+    <div class="sheets">Sheets</div>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
