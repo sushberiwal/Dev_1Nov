@@ -2,6 +2,7 @@
 // npm init -y
 // npm install electron
 // add "start":"electron ."
+// npm install ejs-electron
 
 const electron = require("electron");
 const ejse = require('ejs-electron');
