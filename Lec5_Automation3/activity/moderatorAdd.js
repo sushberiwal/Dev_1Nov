@@ -58,7 +58,7 @@ async function addModerators() {
     let allLinks = [];
     for(let i=0 ; i<allATags.length ; i++){
         let link = await tab.evaluate(  function(elem){  return elem.getAttribute("href");   }   ,  allATags[i]  )
-        let completeLink = "https://www.hackerrank.com"+link;
+        let completeLink = "https://www.hackerrank.com" + link;
         allLinks.push(completeLink);
     }
     console.log(allLinks);

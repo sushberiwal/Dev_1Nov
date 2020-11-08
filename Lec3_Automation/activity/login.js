@@ -195,6 +195,10 @@ function pasteCode(){
             return controlVPromise;
         })
         .then(function(){
+          let controlAPromise = tab.keyboard.up("Control");
+          return controlAPromise;
+      })
+        .then(function(){
            let submitCodePromise = tab.click('.pull-right.btn.btn-primary.hr-monaco-submit');
            return submitCodePromise;
         })
