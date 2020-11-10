@@ -35,7 +35,7 @@ $("document").ready(function(){
         // check if cellObject formula must not be equal to the new formula
         if(cellObject.formula != formula){
             // console.log(formula);
-            let value = solveFormula(formula);
+            let value = solveFormula(formula , cellObject);
             // db update
             cellObject.value = value+"";
             cellObject.formula = formula;
@@ -46,7 +46,7 @@ $("document").ready(function(){
     })
     
 
-    function solveFormula(formula){
+    function solveFormula(formula , cellObject){
         // formula = "( A1 + A2 )";
         let fComponents = formula.split(" ");
         console.log(fComponents);
@@ -59,13 +59,20 @@ $("document").ready(function(){
                 // fComp = "A1"
                 // A1 => colId rowId
                 let {rowId , colId} = getRowIdAndColId(fComp); 
-                let cellObject = db[rowId][colId];
+                let parentCellObject = db[rowId][colId];
+                // falsy values => "" , null , undefined , 0 , false
+                if(cellObject){
+                    // add self to childrens of parentCellObject
+                    addSelfToParentsChildrens( cellObject , parentCellObject);
+                    // update parents of self cellObject
+                    updateParentsOfSelfCellObject(cellObject , fComp)
+                }
                 // {
                 //     name:"A1",
                 //     value:"10",
                 //     formula:""
                 // }
-                let value = cellObject.value; // value=10;
+                let value = parentCellObject.value; // value=10;
                 formula = formula.replace(fComp , value);
                 // "( 10 + A2 )"
             }
@@ -78,6 +85,17 @@ $("document").ready(function(){
     }
 
 
+    function addSelfToParentsChildrens(cellObject , parentCellObject){
+        // B1 will add himself to childrens of A1 and A2
+        parentCellObject.childrens.push(cellObject.name);
+    }
+
+    function updateParentsOfSelfCellObject(cellObject , fComp){
+        // B1 will add A1 and A2 in its parents
+        cellObject.parents.push(fComp);
+    }
+
+
     $(".cell").on("blur" , function(){
         lsc = this;
         console.log("blur event fired !!");
@@ -87,10 +105,42 @@ $("document").ready(function(){
         let cellObject = db[rowId][colId];
         if(cellObject.value != value){
             cellObject.value = value;
+            updateChildrens(cellObject);
             console.log(cellObject);
             console.log(db);
         }
     })
+
+    function updateChildrens(cellObject){
+        // {
+        //     name:"A1",
+        //     value:"20",
+        //     formula:"",
+        //     childrens:["B1" ,"B2" , "C99"]
+        // }
+        // sbhi childrens update hojaeyen
+        for(let i=0 ; i<cellObject.childrens.length ; i++){
+            let child = cellObject.childrens[i];
+            // B1
+            let {rowId , colId} = getRowIdAndColId(child);
+            let childrenCellObject = db[rowId][colId];
+            // {
+            //     name:"B1",
+            //     value:"30",
+            //     formula : "( A1 + A2 )",
+            //     childrens : ["C1" , "D1"],
+            //     parents : ["A1"]
+            // }
+            let value = solveFormula(childrenCellObject.formula);
+            // update db
+            childrenCellObject.value = value+"";
+            // update ui also
+            $(`.cell[rid=${rowId}][cid=${colId}]`).text(value);
+            // $(".cell[rid=" + rowId + "][cid=" + colId+"]").text(value);
+            // .cell[rid="1"][cid = "2"]
+            updateChildrens(childrenCellObject);
+        }
+    }
 
 
 
@@ -116,7 +166,9 @@ $("document").ready(function(){
                 let cellObject = {
                     name : cellAddress,
                     value : "",
-                    formula : ""
+                    formula : "",
+                    parents : [],
+                    childrens : []
                 }
                 // cellObject is pushed 26 time
                 row.push(cellObject);
