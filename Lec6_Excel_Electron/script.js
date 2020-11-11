@@ -3,10 +3,105 @@
 // jquery
 // dom manipulation
 const $ = require("jquery");
+const dialog = require("electron").remote.dialog;
+const fs = require('fs');
 
 $("document").ready(function () {
   let db;
   let lsc;
+
+
+
+  $(".content").on("scroll" , function(){
+    let left = $(this).scrollLeft();
+    let top = $(this).scrollTop();
+    // console.log(top , left);
+    $(".top-row").css("top" , top+"px");
+    $(".top-left-cell").css("top" , top+"px");
+
+    $(".top-left-cell").css("left" , left+"px");
+    $(".left-col").css("left" , left+"px");
+  })
+
+
+  $(".cell").on("keyup" , function(){
+    let height = $(this).height();
+    console.log(height);
+    console.log(this);
+    let rowId = $(this).attr("rid");
+    $(`.left-col-cell[cellid = ${rowId}]`).height(height);
+  })
+
+
+  $(".file").on("click" , function(){
+    $(".home-menu-options").removeClass("active");
+    $(".home").removeClass("active-menu");
+    $(".file-menu-options").addClass("active");
+    $(".file").addClass("active-menu");
+  })
+
+  $(".home").on("click" , function(){
+    $(".file-menu-options").removeClass("active");
+    $(".file").removeClass("active-menu");
+    $(".home-menu-options").addClass("active");
+    $(".home").addClass("active-menu");
+  })
+
+
+
+  // new // open // save
+  $(".new").on("click" , function(){
+    db = []; // initialize database with empty array
+    for (let i = 0; i < 100; i++) {
+      let row = []; // this represents a single row
+      for (let j = 0; j < 26; j++) {
+        // i ? , j ?
+        let cellAddress = String.fromCharCode(65 + j) + (i + 1);
+        let cellObject = {
+          name: cellAddress,
+          value: "",
+          formula: "",
+          parents: [],
+          childrens: [],
+        };
+        // cellObject is pushed 26 time
+        row.push(cellObject);
+        $(`.cell[rid=${i}][cid=${j}]`).html("");
+      }
+      // finally row is pushed in db
+      db.push(row);
+    }
+
+  })
+
+  $(".open").on("click" , function(){
+    // console.log("open clicked");
+    let files = dialog.showOpenDialogSync();
+    let filePath = files[0];
+    let data = fs.readFileSync(filePath);
+    db = JSON.parse(data);
+
+    for(let i=0 ; i<100 ; i++){
+      for(let j=0 ; j<26 ; j++){
+        let cellObject = db[i][j];
+        // {
+        //   name:"A1",
+        //   value:"10"
+        // }
+        $(`.cell[rid=${i}][cid=${j}]`).text(cellObject.value);
+      }
+    }
+  })
+
+  $(".save").on("click" , function(){
+    let filePath = dialog.showSaveDialogSync();
+    let data = JSON.stringify(db);
+    fs.writeFileSync(filePath , data);
+    alert("File Saved !!!");
+  })
+
+
+
 
   // a click event is attached on element with cell class
   $(".cell").on("click", function () {
@@ -194,7 +289,7 @@ $("document").ready(function () {
       // finally row is pushed in db
       db.push(row);
     }
-    console.log(db);
+    // console.log(db);
   }
   init();
 });

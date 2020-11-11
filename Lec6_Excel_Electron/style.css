@@ -12,14 +12,45 @@ html,body{
 .menu{
     border: 1px solid;
     height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.menu div{
+    margin-left:10px;
 }
 
 
 .menu-options{
     border: 1px solid;
     height: 60px;
+    display: flex;
+    align-items: center;
 }
 
+.menu-options div{
+    margin-left: 10px;
+}
+
+
+.file-menu-options{
+    display:none;
+}
+
+.home-menu-options{
+    display:none;
+}
+
+.active{
+    display:flex;
+}
+
+.active-menu{
+    background: lightgreen;
+    color: white;
+    border-radius: 9px;
+    padding: 5px;
+}
 
 .formula-input{
     border: 1px solid;
@@ -45,6 +76,8 @@ html,body{
     background: lightgray;
     height: 25px;
     width: 30px;
+    position: absolute;
+    z-index: 3;
 }
 
 .top-row{
@@ -53,6 +86,7 @@ html,body{
     top: 0px;
     left: 30px;
     background: lightgreen;
+    z-index: 2;
 }
 
 .top-row-cell{
@@ -65,6 +99,9 @@ html,body{
 .left-col{
     background: lightgreen;
     width: 30px;
+    position: absolute;
+    top: 25px;
+    z-index: 2;
 }
 
 .left-col-cell{
@@ -72,6 +109,9 @@ html,body{
     width: 30px;
     border: 1px solid;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .sheets{
     border: 1px solid;
@@ -86,4 +126,5 @@ html,body{
     border: 1px solid;
     min-height: 25px;
     min-width: 70px;
+    max-width: 70px;
 }

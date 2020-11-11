@@ -7,6 +7,9 @@
 const electron = require("electron");
 const ejse = require('ejs-electron');
 
+
+
+
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -16,7 +19,8 @@ function createWindow () {
       width: 800,
       height: 600,
       webPreferences: {
-        nodeIntegration: true // desktop application usme node enabled hojaega
+        nodeIntegration: true, // desktop application usme node enabled hojaega
+        enableRemoteModule:true
       }
     })
     win.loadFile('index.ejs').then(function(){
