@@ -29,13 +29,50 @@ html,body{
 }
 
 .cells{
-    border: 1px solid;
-    height: calc(100vh - 170px);
-    background: lightgreen;
-    overflow: auto;
+    position: absolute;
+    top: 25px;
+    left: 30px;
 }
 
+.content{
+    height: calc(100vh - 170px);
+    /* background: lightgreen; */
+    overflow: auto;
+    position: relative;
+}
 
+.top-left-cell{
+    background: lightgray;
+    height: 25px;
+    width: 30px;
+}
+
+.top-row{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 30px;
+    background: lightgreen;
+}
+
+.top-row-cell{
+    border: 1px solid;
+    min-height: 25px;
+    min-width: 70px;
+    text-align: center;
+}
+
+.left-col{
+    background: lightgreen;
+    width: 30px;
+}
+
+.left-col-cell{
+    height: 25px;
+    width: 30px;
+    border: 1px solid;
+    text-align: center;
+}
 .sheets{
     border: 1px solid;
     height: 30px;
