@@ -11,8 +11,76 @@ $("document").ready(function () {
   let sheetsDB = [];
   // it is currentDB
   let db;
-
   let lsc;
+
+
+  function getCellObject(element){
+    let rowId = Number($(element).attr("rid"));
+    let colId = Number($(element).attr("cid"));
+    let cellObject = db[rowId][colId];
+    return cellObject;
+  }
+  
+
+   // bold // underline // italic
+  $("#bold").on("click" , function(){
+    // lsc => bold => simple
+    // !bold => bold
+    let cellObject = getCellObject(lsc);
+    $(lsc).css("font-weight" , cellObject.bold ? "normal" : "bold");
+    cellObject.bold = !cellObject.bold;
+  })
+
+  $("#underline").on("click" , function(){
+  // lsc => underline => simple
+  // !undelrine => underline
+  let cellObject = getCellObject(lsc);
+  $(lsc).css("text-decoration" , cellObject.underline ? "none" : "underline");
+  cellObject.underline = !cellObject.underline;
+  })
+
+  $("#italic").on("click" , function(){
+  // lsc => italic => simple
+    // !italic => italic
+    let cellObject = getCellObject(lsc);
+    $(lsc).css("font-style" , cellObject.italic ? "normal" : "italic");
+    cellObject.italic = !cellObject.italic;
+  })
+
+
+
+
+  $("#font-size").on("change" , function(){
+    let fontSize =  $(this).val();
+    console.log(fontSize);
+    $(lsc).css("font-size" , fontSize+"px");
+    let cellObject = getCellObject(lsc);
+    cellObject.fontSize = fontSize+"px";
+
+  })
+
+
+  $("#left").on("click" , function(){
+    let cellObject = getCellObject(lsc);
+
+    $(lsc).css("text-align" , "left");
+    cellObject.textAlign.left = !cellObject.textAlign.left;
+  })
+  $("#centre").on("click" , function(){
+    let cellObject = getCellObject(lsc);
+
+    $(lsc).css("text-align" , "center");
+    cellObject.textAlign.center = !cellObject.textAlign.center;
+  })
+  $("#right").on("click" , function(){
+    let cellObject = getCellObject(lsc);
+
+    $(lsc).css("text-align" , "right");
+    cellObject.textAlign.right = !cellObject.textAlign.right;
+  })
+
+
+
 
   $(".add-sheet").on("click", function () {
     // active-sheet change
@@ -146,6 +214,9 @@ $("document").ready(function () {
         //   value:"10"
         // }
         $(`.cell[rid=${i}][cid=${j}]`).text(cellObject.value);
+        // text alignment
+        // font size
+        // bold .// undelrine // italic
       }
     }
   });
@@ -318,10 +389,11 @@ $("document").ready(function () {
   // utility functions
 
   function getRowIdAndColId(address) {
-    // address = "A1"// "B2" // "Z100"
-    let colId = address.charCodeAt(0) - 65;
-    let rowId = Number(address.substring(1)) - 1; //"2"
-    return { rowId: rowId, colId: colId };
+      // address = "A1"// "B2" // "Z100"
+      let colId = address.charCodeAt(0) - 65;
+      let rowId = Number(address.substring(1)) - 1; //"2"
+      return { rowId: rowId, colId: colId };
+    
   }
 
   function init() {
@@ -338,6 +410,11 @@ $("document").ready(function () {
           formula: "",
           parents: [],
           childrens: [],
+          bold : false,
+          italic : false,
+          underline : false,
+          textAlign : {left : true , center : false , right : false},
+          fontSize : "16px"
         };
         // cellObject is pushed 26 time
         row.push(cellObject);
