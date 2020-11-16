@@ -4,53 +4,112 @@
 // dom manipulation
 const $ = require("jquery");
 const dialog = require("electron").remote.dialog;
-const fs = require('fs');
+const fs = require("fs");
 
 $("document").ready(function () {
+  // databases of all the sheets
+  let sheetsDB = [];
+  // it is currentDB
   let db;
+
   let lsc;
 
-  
-  $(".content").on("scroll" , function(){
+  $(".add-sheet").on("click", function () {
+    // active-sheet change
+    // find div with active sheet=> remove active sheet => add active sheet
+    $(".sheet-list .sheet.active-sheet").removeClass("active-sheet");
+    // html append in sheet-list
+    let sheet = `<div class="sheet active-sheet" sid ="${
+      sheetsDB.length
+    }">Sheet ${sheetsDB.length + 1}</div>`;
+    $(".sheet-list").append(sheet);
+
+    $(".sheet.active-sheet").on("click", function () {
+      console.log(this);
+      let hasClass = $(this).hasClass("active-sheet");
+      console.log(hasClass);
+      if (!hasClass) {
+        $(".sheet.active-sheet").removeClass("active-sheet");
+        $(this).addClass("active-sheet");
+        let sid = Number($(this).attr("sid"));
+        db = sheetsDB[sid];
+        for (let i = 0; i < 100; i++) {
+          for (let j = 0; j < 26; j++) {
+            let cellObject = db[i][j];
+            $(`.cell[rid=${i}][cid=${j}]`).text(cellObject.value);
+          }
+        }
+      }
+    });
+    // new db banjae
+    // db = newdb
+    // sheetsDB push new db
+    init();
+    // ui new hojae
+    $("#address").val("");
+    for (let i = 0; i < 100; i++) {
+      for (let j = 0; j < 26; j++) {
+        console.log("inside loop");
+        $(`.cell[rid=${i}][cid=${j}]`).html("");
+      }
+    }
+  });
+
+  $(".sheet").on("click", function () {
+    console.log(this);
+    let hasClass = $(this).hasClass("active-sheet");
+    console.log(hasClass);
+    if (!hasClass) {
+      $(".sheet.active-sheet").removeClass("active-sheet");
+      $(this).addClass("active-sheet");
+      let sid = Number($(this).attr("sid"));
+      db = sheetsDB[sid];
+      for (let i = 0; i < 100; i++) {
+        for (let j = 0; j < 26; j++) {
+          let cellObject = db[i][j];
+          $(`.cell[rid=${i}][cid=${j}]`).text(cellObject.value);
+        }
+      }
+    }
+  });
+
+  $(".content").on("scroll", function () {
     let left = $(this).scrollLeft();
     let top = $(this).scrollTop();
     // console.log(top , left);
-    $(".top-row").css("top" , top+"px");
-    $(".top-left-cell").css("top" , top+"px");
+    $(".top-row").css("top", top + "px");
+    $(".top-left-cell").css("top", top + "px");
 
-    $(".top-left-cell").css("left" , left+"px");
-    $(".left-col").css("left" , left+"px");
-  })
+    $(".top-left-cell").css("left", left + "px");
+    $(".left-col").css("left", left + "px");
+  });
 
-
-  $(".cell").on("keyup" , function(){
+  $(".cell").on("keyup", function () {
     let height = $(this).height();
     console.log(height);
     console.log(this);
     let rowId = $(this).attr("rid");
     $(`.left-col-cell[cellid = ${rowId}]`).height(height);
-  })
+  });
 
-
-  $(".file").on("click" , function(){
+  $(".file").on("click", function () {
     $(".home-menu-options").removeClass("active");
     $(".home").removeClass("active-menu");
     $(".file-menu-options").addClass("active");
     $(".file").addClass("active-menu");
-  })
+  });
 
-  $(".home").on("click" , function(){
+  $(".home").on("click", function () {
     $(".file-menu-options").removeClass("active");
     $(".file").removeClass("active-menu");
     $(".home-menu-options").addClass("active");
     $(".home").addClass("active-menu");
-  })
-
-
+  });
 
   // new // open // save
-  $(".new").on("click" , function(){
+  $(".new").on("click", function () {
     db = []; // initialize database with empty array
+    $("#address").val("");
     for (let i = 0; i < 100; i++) {
       let row = []; // this represents a single row
       for (let j = 0; j < 26; j++) {
@@ -70,18 +129,17 @@ $("document").ready(function () {
       // finally row is pushed in db
       db.push(row);
     }
+  });
 
-  })
-
-  $(".open").on("click" , function(){
+  $(".open").on("click", function () {
     // console.log("open clicked");
     let files = dialog.showOpenDialogSync();
     let filePath = files[0];
     let data = fs.readFileSync(filePath);
     db = JSON.parse(data);
 
-    for(let i=0 ; i<100 ; i++){
-      for(let j=0 ; j<26 ; j++){
+    for (let i = 0; i < 100; i++) {
+      for (let j = 0; j < 26; j++) {
         let cellObject = db[i][j];
         // {
         //   name:"A1",
@@ -90,17 +148,14 @@ $("document").ready(function () {
         $(`.cell[rid=${i}][cid=${j}]`).text(cellObject.value);
       }
     }
-  })
+  });
 
-  $(".save").on("click" , function(){
+  $(".save").on("click", function () {
     let filePath = dialog.showSaveDialogSync();
     let data = JSON.stringify(db);
-    fs.writeFileSync(filePath , data);
+    fs.writeFileSync(filePath, data);
     alert("File Saved !!!");
-  })
-
-
-
+  });
 
   // a click event is attached on element with cell class
   $(".cell").on("click", function () {
@@ -212,17 +267,19 @@ $("document").ready(function () {
     // Childrens=[]
     // Parents = ["A1" , "A2"]
     cellObject.formula = "";
-    for(let i=0 ; i<cellObject.parents.length ; i++){
-        let parentName = cellObject.parents[i];
-        let {rowId , colId} = getRowIdAndColId(parentName);
-        let parentCellObject = db[rowId][colId];
-        // filter function
-        // children:["B1", "C1" , "D1"]; 
-        let filteredChildrens = parentCellObject.childrens.filter(  function(child){
-            return child != cellObject.name;
-        });
-        //filteredChildrens = [C1 , D1];
-        parentCellObject.childrens = filteredChildrens;
+    for (let i = 0; i < cellObject.parents.length; i++) {
+      let parentName = cellObject.parents[i];
+      let { rowId, colId } = getRowIdAndColId(parentName);
+      let parentCellObject = db[rowId][colId];
+      // filter function
+      // children:["B1", "C1" , "D1"];
+      let filteredChildrens = parentCellObject.childrens.filter(function (
+        child
+      ) {
+        return child != cellObject.name;
+      });
+      //filteredChildrens = [C1 , D1];
+      parentCellObject.childrens = filteredChildrens;
     }
     cellObject.parents = [];
   }
@@ -269,7 +326,7 @@ $("document").ready(function () {
 
   function init() {
     // db = 26 * 100
-    db = []; // initialize database with empty array
+    let newDB = []; // initialize database with empty array
     for (let i = 0; i < 100; i++) {
       let row = []; // this represents a single row
       for (let j = 0; j < 26; j++) {
@@ -286,9 +343,12 @@ $("document").ready(function () {
         row.push(cellObject);
       }
       // finally row is pushed in db
-      db.push(row);
+      newDB.push(row);
     }
     // console.log(db);
+    db = newDB;
+    sheetsDB.push(db);
+    console.log(sheetsDB);
   }
   init();
 });

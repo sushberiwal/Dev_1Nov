@@ -114,8 +114,10 @@ html,body{
     justify-content: center;
 }
 .sheets{
-    border: 1px solid;
     height: 30px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    align-items: center;
 }
 
 .row{
@@ -191,4 +193,27 @@ html,body{
 
 #right{
 
+}
+
+.sheet-list{
+    display: flex;
+}
+
+.sheet{
+    margin-left: 10px;
+    padding: 4px;
+    border-radius: 15px;
+    border: 1px solid lightgreen;
+}
+
+.active-sheet{
+    background: lightgreen;
+    color: white;
+}
+.add-sheet{
+    margin-left: 10px;
+    background: lightgreen;
+    padding: 5px;
+    border-radius: 20px;
+    color: white;
 }
