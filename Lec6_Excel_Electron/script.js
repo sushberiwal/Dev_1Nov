@@ -10,8 +10,7 @@ $("document").ready(function () {
   let db;
   let lsc;
 
-
-
+  
   $(".content").on("scroll" , function(){
     let left = $(this).scrollLeft();
     let top = $(this).scrollTop();
