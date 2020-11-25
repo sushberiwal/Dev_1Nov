@@ -7,12 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="tools"></div>
+    <div class="tools">
+        <div class="toolbox">
+            <div class="tool">
+                <img src="./resources-master/resources-master/NewIcons/Black_Pencil.svg" alt="">
+            </div>
+            <div class="tool">
+                <img src="./resources-master/resources-master/NewIcons/Eraser.svg" alt="">
+            </div>
+            <div class="tool">
+                <img src="./resources-master/resources-master/NewIcons/StickyNote.svg" alt="">
+            </div>
+            <div class="tool">
+                <img src="./resources-master/resources-master/NewIcons/Photo.svg" alt="">
+            </div>
+            <div class="tool">
+                <img src="./resources-master/resources-master/NewIcons/Download.svg" alt="">
+            </div>
+            <div class="tool" id="undo">
+                <img src="./resources-master/resources-master/NewIcons/Undo.svg" alt="">
+            </div>
+            <div class="tool" id="redo">
+                <img src="./resources-master/resources-master/NewIcons/Redo.svg" alt="">
+            </div>
+        </div>
+
+    </div>
     <div class="content">
         <canvas id="canvas"></canvas>
     </div>
 </body>
 <script src="./script.js"></script>
+<script src="./tools.js"></script>
 <!-- <script>
 // canvas ke functions => 2d drawing kese hoiti hai
 const canvas = document.getElementById('canvas');

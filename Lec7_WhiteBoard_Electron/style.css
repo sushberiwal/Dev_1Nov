@@ -10,6 +10,8 @@ body,html{
 .tools{
     background: aliceblue;
     height: 100px;
+    display: flex;
+    align-items: center;
 }
 
 .content{
@@ -21,4 +23,18 @@ body,html{
     /* height: 100%;
     width: 100%;
     background: cadetblue; */
+}
+
+.toolbox{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.tool{
+    height: 50px;
+}
+
+.tool img{
+    height: 100%;
 }
