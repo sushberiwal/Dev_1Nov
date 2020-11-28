@@ -1,5 +1,61 @@
+let pencil = document.querySelector("#pencil");
+let eraser = document.querySelector("#eraser");
 let undo = document.querySelector("#undo");
 let redo = document.querySelector("#redo");
+
+let pencilOptions = document.querySelector("#pencil-options");
+let eraserOptions = document.querySelector("#eraser-options");
+
+
+
+ctx.lineWidth = 40;
+
+let activeTool = "pencil";
+
+
+
+
+pencil.addEventListener("click" , function(){
+    if( !pencil.classList.contains("active-tool")){
+        eraser.classList.remove("active-tool");
+        eraserOptions.classList.add("hide");
+        pencil.classList.add("active-tool");
+        ctx.strokeStyle = "black";
+    }
+    else{
+        // already active hai tool
+        if(pencilOptions.classList.contains("hide")){
+            pencilOptions.classList.remove("hide");
+        }
+        else{
+            pencilOptions.classList.add("hide");
+        }
+    }
+})
+
+
+eraser.addEventListener("click" , function(){
+    if(  !eraser.classList.contains("active-tool") ){
+        pencil.classList.remove("active-tool");
+        pencilOptions.classList.add("hide");
+        eraser.classList.add("active-tool");
+        ctx.strokeStyle = "white";
+    }
+    else{
+        // already active hai tool
+        if(eraserOptions.classList.contains("hide")){
+            eraserOptions.classList.remove("hide");
+        }
+        else{
+            eraserOptions.classList.add("hide");
+        }
+    }
+})
+
+
+
+
+
 
 
 

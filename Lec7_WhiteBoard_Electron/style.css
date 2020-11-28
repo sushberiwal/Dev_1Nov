@@ -1,40 +1,90 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
-body,html{
-    margin:0px;
+body,
+html {
+  margin: 0px;
 }
 
-
-.tools{
-    background: aliceblue;
-    height: 100px;
-    display: flex;
-    align-items: center;
+.tools {
+  background: aliceblue;
+  height: 100px;
+  display: flex;
+  align-items: center;
 }
 
-.content{
-    height: calc(100vh - 100px);
-    background: white;
+.content {
+  height: calc(100vh - 100px);
+  background: white;
 }
 
-#canvas{
-    /* height: 100%;
+#canvas {
+  /* height: 100%;
     width: 100%;
     background: cadetblue; */
 }
 
-.toolbox{
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
+.toolbox {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.tool {
+  position: relative;
+  height: 50px;
+}
+.tool img {
+  height: 100%;
+}
+.red {
+  background: red;
+}
+.yellow {
+  background: yellow;
+}
+.blue {
+  background: blue;
+}
+.black {
+  background: black;
 }
 
-.tool{
-    height: 50px;
+.tool-options {
+  height: 100px;
+  width: 160px;
+  /* border: 1px solid; */
+  position: absolute;
+  background: lightgray;
+  border-radius: 10px;
+  top: 65px;
+  left: -60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.tool img{
-    height: 100%;
+.pencil-colors {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.pencil-colors div {
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+}
+
+
+.hide{
+    display: none;
+}
+
+.active-tool{
+    background: lightgray;
+    height: 60px;
+    padding: 7px;
+    border-radius: 25px;
 }

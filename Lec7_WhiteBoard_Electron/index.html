@@ -9,11 +9,23 @@
 <body>
     <div class="tools">
         <div class="toolbox">
-            <div class="tool">
+            <div class="tool active-tool" id="pencil">
                 <img src="./resources-master/resources-master/NewIcons/Black_Pencil.svg" alt="">
+                <div class="tool-options hide" id="pencil-options">
+                    <input type="range" name="" id="pencilSize" value="1" min="1" max="40">
+                    <div class="pencil-colors">
+                        <div class="red"></div>
+                        <div class="yellow"></div>
+                        <div class="blue"></div>
+                        <div class="black"></div>
+                    </div>
+                </div>
             </div>
-            <div class="tool">
+            <div class="tool" id="eraser">
                 <img src="./resources-master/resources-master/NewIcons/Eraser.svg" alt="">
+                <div class="tool-options hide" id="eraser-options">
+                    <input type="range" name="" id="eraserSize" value="1" min="1" max="40">
+                </div>
             </div>
             <div class="tool">
                 <img src="./resources-master/resources-master/NewIcons/StickyNote.svg" alt="">
