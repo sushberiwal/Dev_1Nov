@@ -77,14 +77,48 @@ html {
   border-radius: 20px;
 }
 
-
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
 
-.active-tool{
-    background: lightgray;
-    height: 60px;
-    padding: 7px;
-    border-radius: 25px;
+.active-tool {
+  background: lightgray;
+  height: 60px;
+  padding: 7px;
+  border-radius: 25px;
+}
+.sticky {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  /* background: aqua; */
+  /* height: 200px; */
+  border: 1px solid lightgray;
+}
+
+.sticky-header {
+  background: aliceblue;
+  height: 36px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+.minimize {
+  height: 22px;
+  background: lightgreen;
+  width: 22px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+.close {
+  height: 22px;
+  background: lightcoral;
+  width: 22px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+#stickybox {
+  outline: none;
+  border: none;
 }
