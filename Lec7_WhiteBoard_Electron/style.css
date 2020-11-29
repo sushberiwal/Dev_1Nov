@@ -94,6 +94,7 @@ html {
   /* background: aqua; */
   /* height: 200px; */
   border: 1px solid lightgray;
+  width: 233px;
 }
 
 .sticky-header {
@@ -103,6 +104,7 @@ html {
   justify-content: flex-end;
   align-items: center;
   border-bottom: 1px solid lightgray;
+  width:100%;
 }
 .minimize {
   height: 22px;
@@ -118,7 +120,7 @@ html {
   border-radius: 10px;
   margin-right: 5px;
 }
-#stickybox {
+.stickybox {
   outline: none;
   border: none;
 }
