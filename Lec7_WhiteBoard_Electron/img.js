@@ -1,4 +1,11 @@
 let imageUpload = document.querySelector("#photo-upload");
+let upload = document.querySelector("#upload");
+
+let download = document.querySelector("#download");
+
+upload.addEventListener("click" , function(){
+    imageUpload.click();
+})
 
 imageUpload.addEventListener("change" , function(){
     // console.log(imageUpload.file);
@@ -12,10 +19,19 @@ imageUpload.addEventListener("change" , function(){
     // <img />
     // set attribute of img element
     img.setAttribute("src" , filePath)
+    img.classList.add("photo");
     //<img src ="" />
-    console.log(img);
-
-    // append image to document -> body
-    document.body.appendChild(img);
+    // console.log(img);
+    let stickyContent = createSticky();
+    stickyContent.appendChild(img);
 })
 
+download.addEventListener("click" , function(){
+    let filePath = canvas.toDataURL("image/png");  
+    let aTag = document.createElement('a');
+    //<a href = "" download = "filename.png"></a>
+    aTag.setAttribute("download" , "canvas.png");
+    aTag.setAttribute("href" , filePath);
+    aTag.click();
+    aTag.remove();
+})
