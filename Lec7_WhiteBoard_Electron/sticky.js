@@ -30,7 +30,7 @@ stickyAdd.addEventListener("click" , function(){
     textBox.setAttribute("class" , "stickybox");
     textBox.setAttribute("rows" , "10");
     textBox.setAttribute("cols" , "30");
-    // <textarea id="stickybox" rows="10" cols="30"> </textarea>
+    // <textarea class="stickybox" rows="10" cols="30"> </textarea>
 
     stickyContent.appendChild(textBox);
     // <div class="sticky-content">
@@ -70,9 +70,6 @@ stickyAdd.addEventListener("click" , function(){
     // stickyNotes.innerHTML += stickyHtml;
     document.body.appendChild(sticky);
 
-
-
-
     let initialX;
     let initialY;
     let isStickyHold = false;
@@ -80,8 +77,7 @@ stickyAdd.addEventListener("click" , function(){
         isStickyHold = true;
         initialX = e.clientX;
         initialY = e.clientY;
-    })
-    
+    })    
     stickyHeader.addEventListener("mousemove" , function(e){
         if(isStickyHold){
             let finalX = e.clientX;
@@ -99,7 +95,6 @@ stickyAdd.addEventListener("click" , function(){
             initialY = finalY;
         }
     })
-
     stickyHeader.addEventListener("mouseup" , function(e){
         isStickyHold = false;
     })
