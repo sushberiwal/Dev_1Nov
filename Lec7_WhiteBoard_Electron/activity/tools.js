@@ -15,7 +15,6 @@ let eraserSize = document.querySelector("#eraserSize");
 //     ctx.strokeStyle = "red";
 // })
 
-
 let pencilWidth = 1;
 let eraserWidth = 1;
 
