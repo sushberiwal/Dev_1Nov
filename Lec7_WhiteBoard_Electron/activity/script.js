@@ -21,6 +21,7 @@ let redoPoints = [];
 let line = [];
 
 canvas.addEventListener("mousedown" , function(e){
+    // socket.emit("mousedown" , "I am drawing !!");
     if(redoPoints.length){
         redoPoints = [];
     }
@@ -36,6 +37,9 @@ canvas.addEventListener("mousedown" , function(e){
         strokeStyle : ctx.strokeStyle,
         lineWidth : ctx.lineWidth
     }
+
+    socket.emit("mousedown" , point);
+    
     line.push(point);
 })
 canvas.addEventListener("mousemove" , function(e){
@@ -51,6 +55,7 @@ canvas.addEventListener("mousemove" , function(e){
             strokeStyle : ctx.strokeStyle,
             lineWidth : ctx.lineWidth
         }
+        socket.emit("mousemove" , point);
         line.push(point);
     }
 })

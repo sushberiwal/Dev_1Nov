@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="tools">
+        <div class="tool-button">
+            <i class="fas fa-times" id="close-tool"></i>
+            <i class="fas fa-bars hide" id="open-tool"></i>
+        </div>
         <div class="toolbox add-animation">
             <div class="tool active-tool" id="pencil">
                 <img src="./resources-master/resources-master/NewIcons/Black_Pencil.svg" alt="">
@@ -50,11 +55,17 @@
         <canvas id="canvas"></canvas>
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js" integrity="sha512-Jr0UIR/Q8MUX+93zjDOhuDUKLqJZObtwpkLJQcR9qMaLgL0thet39IORuavUaZFkZ8a4ktrUsKPM9mf5LWMduA==" crossorigin="anonymous"></script>
+<script>
+ const socket = io.connect("http://localhost:3000");
+</script>
 <script src="./script.js"></script>
 <script src="./tools.js"></script>
 <script src="./sticky.js"></script>
 <script src="./img.js"></script>
 <script src="./createSticky.js"></script>
+<script src="./animation.js"></script>
+<script src="./socket.js"></script>
 <!-- <script>
 // canvas ke functions => 2d drawing kese hoiti hai
 const canvas = document.getElementById('canvas');
