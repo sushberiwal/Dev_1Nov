@@ -8,10 +8,10 @@ html {
 }
 
 .tools {
-  background: aliceblue;
   height: 100px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .content {
@@ -28,7 +28,11 @@ html {
 .toolbox {
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  width: 80%;
+  height: 80%;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
 .tool {
   position: relative;
@@ -127,4 +131,26 @@ html {
 .photo{
   width: 100%;
   object-fit: contain;
+}
+
+@keyframes tool{
+  0%{
+    opacity: 0;
+    transform: scale(0);
+  }
+ 
+  /* 50%{
+    opacity: 0.5;
+    transform: scale(0.5);
+  } */
+ 
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.add-animation{
+  animation-name: tool;
+  animation-duration: 0.5s;
 }
