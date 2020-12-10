@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />    
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+
+        <div class="chat-input-name">
+            <input type="text" id="chat-user">
+            <div class="join-chat">Join Chat !</div>
+        </div>
+
+        <div class="chat-content hide">
+            <div class="chat-box">
+                <!-- <div class="chat right">
+                    <div class="chat-name">Steve</div>
+                    <div class="chat-text">Heyyy Everyone !!!</div>
+                </div>
+                <div class="chat join">Steve joined the chat !</div>
+
+                <div class="chat left">
+                    <div class="chat-name">Tony</div>
+                    <div class="chat-text">Heyyy Guyss !!!</div>
+                </div>
+                <div class="chat leave">Steve left the chat !</div>
+                <div class="chat right">
+                    <div class="chat-name">Steve</div>
+                    <div class="chat-text">Heyyy Everyone i am doing fine what aboput youy !!! !!!</div>
+                </div> -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input">
+                <div class="send"><i id="send" class="fas fa-paper-plane"></i></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+    <script>
+        const socket = io.connect("http://localhost:3000")
+    </script>
+    <script src="./script.js"></script>
+    <script src="./socket.js"></script>
+</body>
+</html>

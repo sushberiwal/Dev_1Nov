@@ -24,4 +24,5 @@ function createWindow () {
         win.webContents.openDevTools() // you will get dev tools opened by default 
     });
   }
+  
 app.whenReady().then(createWindow)

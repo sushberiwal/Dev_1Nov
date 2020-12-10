@@ -10,7 +10,7 @@ upload.addEventListener("click" , function(){
 imageUpload.addEventListener("change" , function(){
     // console.log(imageUpload.file);
     let fileObject = imageUpload.files[0];
-
+    console.log(fileObject);
     // gives you a image url
     let filePath = URL.createObjectURL(fileObject);
     

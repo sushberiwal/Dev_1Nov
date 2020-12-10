@@ -1,0 +1,115 @@
+*{
+    box-sizing: border-box;
+    margin:0px;
+    padding:0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.hide{
+    display: none !important;
+}
+
+
+.chat-input-name{
+position: absolute;
+top: 40%;
+left: 30%;
+}
+
+#chat-user{
+
+}
+
+.join-chat{
+color:white;
+background: #34495e;
+width: 100px;
+}
+
+
+
+.chat-container{
+background: lightblue;
+height: 500px;
+width: 500px;
+margin:auto;
+background-image: url("./Whatsapp-Wallpaper-112.jpg");
+background-size: contain;
+}
+
+.chat-content{
+    height: 100%;
+}
+
+.chat-box{
+    height: 90%;
+    overflow: auto;
+}
+.chat{
+clear: both;
+padding: 6px;
+border-radius: 10px;
+margin: 10px;
+}
+.chat-name{
+font-weight: bold;
+}
+.chat-text{
+
+}
+
+.leave{
+color:white;
+background: #e74c3c;
+/* width: 80%; */
+text-align: center;
+}
+
+.join{
+    color:white;
+    background: #3498db;
+    /* width: 80%; */
+    text-align: center;
+}
+
+
+.left{
+    background: white;
+    float: left;
+    color:#34495e;
+    max-width: 300px;
+min-width: 150px;
+}
+.right{
+    background: #34495e;
+    float: right;
+    color:white;
+    max-width: 300px;
+min-width: 150px;
+}
+
+.chat-input{
+    background: white;
+    width: 90%;
+    border-radius: 10px;
+    margin: auto;
+    display: flex;
+    height: 8%;
+    align-items: center;
+    justify-content: space-around;
+}
+.chat-input input{
+    outline:none;
+    border: none;
+    height: 100%;
+    width: 85%;
+}
+
+.fas{
+    color:lightgreen;
+}
+
+.send{
+
+}
