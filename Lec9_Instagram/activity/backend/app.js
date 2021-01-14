@@ -1,32 +1,33 @@
 const express = require("express");
-const mysql = require("mysql");
-const { HOST, USER, PASSWORD, DB_NAME } = require("./config/secrets");
-
+const userRouter = require("./router/userRouter");
 const app = express();
 
-//database connection
-const connection = mysql.createConnection({
-  host     : HOST,
-  user     : USER,
-  password : PASSWORD,
-  database : DB_NAME
-});
+
+app.use(express.json());
+
+
+// Users =>
+// get all users , get a user , create a user ,  update a user , delete a user 
+
+app.use("/api/user" , userRouter);
+
+
+
+
+
+// POSTS ->
+// get all posts , get a post , create a post , update a post , delete a post 
+
+// on the basis of id
+
+// get all followers // get all following
+// see pending request // send request // accept a pending request // cancel pending request // unfollow // 
+
+
+
+
+
  
-connection.connect();
- 
-// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results[0].solution);
-// });
-
-// const sql = `INSERT INTO user_table`
-
-connection.query("DESC user_table" , function(error , data){
-    console.log(data);
-})
- 
-
-
 app.listen(3000 , function(){
     console.log("app is listeningg at 3000 port !!");
 })
