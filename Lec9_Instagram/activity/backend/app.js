@@ -17,6 +17,8 @@ app.use("/api/user" , userRouter);
 
 // POSTS ->
 // get all posts , get a post , create a post , update a post , delete a post 
+// app.use("/api/post" , postRouter);
+
 
 // on the basis of id
 
