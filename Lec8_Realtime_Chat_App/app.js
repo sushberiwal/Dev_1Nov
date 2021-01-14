@@ -17,6 +17,8 @@ app.get('/', (req, res) => {
 
 io.on('connection', function(socket){
     console.log(`${socket.id} connected`);
+    
+
 
     socket.on("join-chat" , function(name){
         socket.broadcast.emit("user-joined" , name);
@@ -36,7 +38,7 @@ io.on('connection', function(socket){
         
         // [ {id:1234124124 , name:"asidhfaus"} ]
 
-        if(user){
+        if(user[0] && user[0].name){
             socket.broadcast.emit("leave" , user[0].name );
         }
 
