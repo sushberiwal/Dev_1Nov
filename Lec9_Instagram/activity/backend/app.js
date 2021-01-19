@@ -58,6 +58,49 @@ function addInFollowerTable( follower_id , uid  ){
     })
 }
 
+function acceptRequest(followId , uid){
+    return new Promise(function(resolve , reject){
+        let sql = `UPDATE following_table SET isAccepted = 1 WHERE uid = '${uid}' AND followId = '${followId}'`;
+        connection.query(sql , function(error , data){
+            if(error){
+                reject(error);
+            }
+            else{
+                resolve(data);
+            }
+    })
+
+    })
+}
+
+function getRequests(followId){
+return new Promise(function(resolve , reject){
+    let sql = `SELECT * FROM following_table WHERE followId = '${followId}' AND isAccepted = false`;
+    connection.query(sql , function(error , data){
+        if(error){
+            reject(error);
+        }
+        else{
+            resolve(data);
+        }
+    })
+})
+}
+
+function cancelRequest(followId , uid ){
+    return new Promise(function(resolve , reject){
+        let sql = `DELETE FROM following_table WHERE uid = '${uid}' AND followId = '${followId}'`;
+        connection.query(sql , function(error , data){
+            if(error){
+                reject(error);
+            }
+            else{
+                resolve(data);
+            }
+        })
+    })
+}
+
 // send request
 app.post("/api/request" , async function(req , res){
     try{
@@ -98,24 +141,73 @@ app.post("/api/request" , async function(req , res){
 })
 
 // accept a pending request
-app.patch("/api/accept" , function(req , res){
+app.patch("/api/accept" , async function(req , res){
+try{
+    let {uid , toBeAcceptedId} = req.body;
+    let acceptData = await acceptRequest(uid , toBeAcceptedId);
+    let followerData = await addInFollowerTable(toBeAcceptedId , uid);
+    res.json({
+        message:"Accepted Request !",
+        acceptData ,
+        followerData
+    })
 
+}
+catch(error){
+    res.json({
+        message:"Failed to accept request !",
+        error
+    })
+}
 })
 
 // see pending request
-app.get("/api/request/:uid" , function(req , res){
-
+app.get("/api/request/:uid" , async function(req , res){
+    try{
+        let uid = req.params.uid;
+        let requests = await getRequests(uid);
+        // console.log(requests);
+        let requestsNames = [];
+        for(let i=0 ; i<requests.length ; i++){
+            let user = await getUserByIdPromisified(requests[i].uid);
+            requestsNames.push(user[0]);
+        }
+        console.log(requestsNames);
+        res.json({
+            message:"Got All Requests !",
+            requestsNames
+        })
+    }
+    catch(error){
+        res.json({
+            message:"Failed to get requests !!",
+            error
+        })
+    }
 })
 // cancel pending request
-app.delete("/api/request" , function(req , res){
-
+app.delete("/api/request" , async function(req , res){
+    try{
+        let {uid , toBeCancelId} = req.body;
+        let cancelObj = await cancelRequest(uid , toBeCancelId);
+        res.json({
+            message:"Cancelled Request !",
+            cancelObj
+        })
+    }
+    catch(error){
+        res.json({
+            message:"Failed to cancel Request",
+            error
+        })
+    }
 })
 
 // get all followers 
-
 // get all following
-   
 // unfollow
+
+
 
 
 
