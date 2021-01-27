@@ -43,7 +43,7 @@ function Hello(props){
 function HelloParent(){
     return <React.Fragment>
             {names.map( function(name){
-                return <Hello name ={name}></Hello>
+                return <Hello key={name} name ={name}></Hello>
             })}
         </React.Fragment>
 }
