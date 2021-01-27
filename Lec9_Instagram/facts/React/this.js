@@ -1,3 +1,7 @@
+"use strict"
+
+name = "Steve";
+console.log(global);
 // let obj = {
 //   name: "Steve",
 //   sayHi: function () {
