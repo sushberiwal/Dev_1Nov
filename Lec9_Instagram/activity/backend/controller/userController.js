@@ -1,6 +1,8 @@
 const connection = require("../model/db");
 const { v4: uuidv4 } = require("uuid");
 
+
+
 function getAllUsers(req, res) {
   const sql = `SELECT * FROM user_table`;
   connection.query(sql, function (error, data) {
