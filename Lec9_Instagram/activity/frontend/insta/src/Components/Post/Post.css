@@ -1,0 +1,83 @@
+.post {
+  height: 600px;
+  width: 600px;
+  border: 1px solid lightgray;
+  background: white;
+  margin-bottom: 100px;
+}
+
+.post-username {
+  /* background: red; */
+  height: 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  padding: 3px;
+}
+
+.post-username-image {
+  height: 75%;
+  width: 5%;
+}
+
+.post-username-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.post-username .username {
+    margin-left: 10px;
+}
+
+.post-image {
+  height: 60%;
+    border-bottom: 1px solid lightgray;
+}
+.post-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.post-actions {
+  display: flex;
+    height: 5%;
+    padding: 3px;
+    align-items: center;
+    /* background: aquamarine; */
+    width: 10%;
+    justify-content: space-around;
+}
+.like {
+}
+.comment {
+}
+.post-likes-count {
+  height: 5%;
+  border-bottom: 1px solid lightgray;
+}
+.post-comments {
+  height: 15%;
+  /* background:yellow; */
+}
+.post-add-comment {
+  border-top: 1px solid lightgray;
+  background: red;
+  height: 8%;
+}
+.post-add-comment input {
+  height: 100%;
+  width: 90%;
+  outline: none;
+  border: none;
+  padding: 5px;
+}
+
+.post-add-comment button {
+  background: none;
+  border: none;
+  height: 100%;
+  width: 10%;
+  background: white;
+}

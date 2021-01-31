@@ -1,0 +1,29 @@
+.navbar{
+display: flex;
+border-bottom: 1px solid lightgray;
+justify-content: space-around;
+align-items: center;
+height: 60px;
+background:white;
+}
+.nav.logo{
+
+}
+.nav.logo img{
+    
+}
+
+.nav.search-box input{
+
+}
+
+.nav.links{
+/* background: red; */
+display: flex;
+width: 150px;
+justify-content: space-around;
+}
+
+.nav.links div{
+
+}

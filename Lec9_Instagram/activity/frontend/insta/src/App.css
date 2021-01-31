@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+    margin:0px;
+    padding:0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background: #FAFAFA;
+}
+
+.home-view{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
