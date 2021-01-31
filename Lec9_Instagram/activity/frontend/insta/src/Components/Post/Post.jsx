@@ -3,12 +3,26 @@ import "./Post.css"
 // stateless functional component
 
 class Post extends Component {
+    // 1. initial state is set
     state = { 
-        username:"sushantberiwal",
-        userImage:"default.png" ,
-        postImage:"post.png" ,
-        likes:12123
+        username:"",
+        userImage:"" ,
+        postImage:"" ,
+        likes:""
      }
+
+    // 3. component did Mount 
+    componentDidMount(){
+        // it triggers render function
+        this.setState({
+            username : this.props.post.username ,
+            userImage : this.props.post.userImage ,
+            postImage : this.props.post.postImage ,
+            likes : this.props.post.likes
+        })
+    } 
+
+    // 2. render function is called
     render() { 
         return ( 
             <div className="post">
@@ -23,10 +37,10 @@ class Post extends Component {
                 </div>
                 <div className="post-actions">
                     <div className="like">
-                    <i class="far fa-heart"></i>
+                    <i className="far fa-heart"></i>
                     </div>
                     <div className="comment">
-                    <i class="far fa-comment"></i>
+                    <i className="far fa-comment"></i>
                     </div>
                 </div>
                 <div className="post-likes-count">{this.state.likes} likes</div>

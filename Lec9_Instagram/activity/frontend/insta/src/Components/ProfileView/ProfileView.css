@@ -1,0 +1,63 @@
+.profile-view{
+    background: white;
+    width: 35%;
+    border: 1px solid lightgray;
+    height: 450px;
+    padding: 5px;
+}
+.user{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    
+}
+.user-image{
+    height: 70px;
+    width: 70px;
+}
+
+.user-image img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.user-detail{
+
+}
+
+.username{
+    font-weight: bold;
+}
+
+.suggestions{
+    border-top: 1px solid lightgray;
+}
+
+.suggestion-user{
+    display: flex;
+    align-items: center;
+    /* background: aqua; */
+    width: 60%;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.suggestion-user-image{
+    height: 70px;
+    width: 70px;
+}
+.suggestion-user-image img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.suggestion-user-name{
+
+}
+.suggestion-user-follow{
+
+}
