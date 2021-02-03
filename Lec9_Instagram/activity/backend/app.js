@@ -6,7 +6,7 @@ const app = express();
 
 
 app.use(express.json());
-
+app.use(express.static("public"));
 
 //Users =>
 //get all users , get a user , create a user ,  update a user , delete a user 

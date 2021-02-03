@@ -61,12 +61,19 @@ function updateUserById(req, res) {
   for (key in updateObject) {
     sql += `${key} = '${updateObject[key]}' ,`;
   }
-  sql = sql.substring(0, sql.length - 1);
+  if(req.file){
+    let pimage = req.file.destination + "/" + req.file.filename;
+    // public/images/user/akjsbfasbhf.jpeg
+    pimage = pimage.substring(7);
+    sql += ` pimage = '${pimage}' ` 
+  }
+  // sql = sql.substring(0, sql.length - 1);
   sql += `WHERE uid = '${uid}'`;
   // UPDATE user_table
   // SET "name"="IRON MAN" "bio":"I am billionaire"
   // WHERE uid = '1313131'
   // const sql ???
+  console.log(sql);
   connection.query(sql, function (error, data) {
     if (error) {
       res.json({
@@ -105,12 +112,12 @@ function deleteUserById(req, res) {
 }
 function createUserPromisified(userObject) {
   return new Promise(function (resolve, reject) {
-    const { uid, name, email, pw, username, bio, isPublic } = userObject;
+    const { uid, name, email, pw, username, bio, isPublic , pimage} = userObject;
     let sql;
     if (isPublic != undefined) {
-      sql = `INSERT INTO user_table(uid , name , email , pw , username , bio , isPublic) VALUES ( '${uid}' , '${name}' , '${email}' , '${pw}' , '${username}' , '${bio}' , ${isPublic})`;
+      sql = `INSERT INTO user_table(uid , name , email , pw , pimage , username , bio , isPublic) VALUES ( '${uid}' , '${name}' , '${email}' , '${pw}' , '${pimage ? pimage : "default.png"}' , '${username}' , '${bio}' , ${isPublic})`;
     } else {
-      sql = `INSERT INTO user_table(uid , name , email , pw , username , bio ) VALUES ( '${uid}' , '${name}' , '${email}' , '${pw}' , '${username}' , '${bio}')`;
+      sql = `INSERT INTO user_table(uid , name , email , pw , username , bio ) VALUES ( '${uid}' , '${name}' , '${email}' , '${pw}' , '${pimage ? pimage : "default.png"}' , '${username}' , '${bio}')`;
     }
     console.log(sql);
     connection.query(sql, function (error, data) {
@@ -125,6 +132,11 @@ function createUserPromisified(userObject) {
 async function createUser(req, res) {
   try {
     const uid = uuidv4();
+    console.log(req.file);
+    let pimage = req.file.destination + "/" + req.file.filename;
+    // public/images/user/akjsbfasbhf.jpeg
+    pimage = pimage.substring(7);
+
     const { name, email, pw, username, bio, isPublic } = req.body;
     let userObject = {
       uid,
@@ -134,7 +146,10 @@ async function createUser(req, res) {
       username,
       bio,
       isPublic,
+      pimage
     };
+    console.log(userObject);
+
     let data = await createUserPromisified(userObject);
     res.status(200).json({
       message: "User Created Succssfully !!!",

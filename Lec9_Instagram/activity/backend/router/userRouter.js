@@ -1,43 +1,36 @@
 const express = require("express");
 const { getAllUsers, createUser, getUserById, deleteUserById, updateUserById } = require("../controller/userController");
 const userRouter = express.Router();
-
-
+const path = require("path");
 const multer = require("multer");
 
+// create => json data , image 
 
-let storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '/images/user')
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'public/images/user');
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
       console.log(file);
-    cb(null, file.fieldname + '-' + Date.now())
+      cb(null, Date.now() + path.extname(file.originalname));
   }
-})
-
-function fileFilter (req, file, cb) {
-    console.log(file);
-    // cb(null, false)
-    
-    // cb(null, true)
-    
-  }
-
-
-const upload = multer({
-  storage:storage,
-  fileFilter:fileFilter
 });
 
-
-
+// only accept mimetype == image 
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
+      cb(null, true);
+  } else {
+      cb(null, false);
+  }
+}
+const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 
 // localhost:3000/api/users/
-userRouter.route("/").get(getAllUsers).post( upload.single('user') , createUser);
+userRouter.route("/").get(getAllUsers).post(upload.single('user') , createUser);
 // localhost:3000/api/users/:uid
-userRouter.route("/:uid").get(getUserById).delete(deleteUserById).patch(updateUserById);
+userRouter.route("/:uid").get(getUserById).delete(deleteUserById).patch(upload.single('user') , updateUserById);
 
 
 module.exports = userRouter;
