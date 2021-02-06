@@ -1,0 +1,41 @@
+.settings{
+    display: flex;
+    /* width: 40%; */
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+.left{
+    width: 30%;
+}
+.right{
+    width: 50%;
+    /* background: bisque; */
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid lightgray;
+    background: white;
+    border-radius: 10px;
+}
+.profile-photo{
+    width: 100%;
+}
+.profile-photo img{
+    width: 100%;
+    border-radius: 50%;
+    object-fit: contain;
+}
+.setting-input , .ispublic{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.setting-input label{
+
+}
+
+.setting-input input{
+
+}

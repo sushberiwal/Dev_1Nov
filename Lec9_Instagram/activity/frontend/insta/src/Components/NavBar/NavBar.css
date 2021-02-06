@@ -20,7 +20,7 @@ background:white;
 .nav.links{
 /* background: red; */
 display: flex;
-width: 150px;
+width: 25%;
 justify-content: space-around;
 }
 
