@@ -17,6 +17,8 @@ class Setting extends Component {
     disabled : true
   };
 
+  fileInput = React.createRef();
+
   setDisableFalse = () =>{
       this.setState({
           disabled : false
@@ -35,7 +37,21 @@ class Setting extends Component {
   }
 
   onSaveHandler = () =>{
+    console.log(this.fileInput.current);
+    let formData = new FormData();
+    if(this.fileInput.current.files.length){
+      let fileObject = this.fileInput.current.files[0];
+      formData.append('user' , fileObject);
+    }
+    formData.append('name' , this.state.user.name);
+    formData.append('username' , this.state.user.username);
+    formData.append('bio' , this.state.user.bio);
+    formData.append('email' , this.state.user.email);
+    formData.append('pw' , this.state.user.pw);
 
+    axios.patch("/api/user/0174eac2-c136-40be-8a0b-038aeb40cd64" , formData).then(obj =>{
+      this.componentDidMount();
+    })
   }
 
   onChangeHandler = (e) =>{
@@ -43,7 +59,6 @@ class Setting extends Component {
       let key = e.target.id;
       let user = this.state.user;
       user[key] = e.target.value;
-
       this.setState({
           user        
       })
@@ -54,7 +69,8 @@ class Setting extends Component {
       let user = obj.data.data[0];
       console.log(user);
       this.setState({
-        user : user 
+        user : user ,
+        disabled : true
       });
     });
   }
@@ -69,6 +85,7 @@ class Setting extends Component {
         <div className="left">
           <div className="profile-photo">
             <img src={pimage} alt="user.jpg" />
+            {!disabled && <input type="file" id="profile-photo" ref={this.fileInput}/> }
           </div>
         </div>
         <div className="right">

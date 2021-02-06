@@ -4,6 +4,8 @@
     border: 1px solid lightgray;
     height: 450px;
     padding: 5px;
+    position: sticky;
+    top: 80px;
 }
 .user{
     display: flex;
