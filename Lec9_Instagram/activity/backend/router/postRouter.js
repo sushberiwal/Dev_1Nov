@@ -30,7 +30,8 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 // localhost:3000/api/users/
 postRouter.route("").get(getAllPosts).post(upload.single('post') , createPost);
 // localhost:3000/api/users/:uid
-postRouter.route("/:pid").get(getPostById).delete(deletePostById).patch(updatePostById);
+postRouter.route("/:uid").get(getPostById);
+postRouter.route("/:pid").delete(deletePostById).patch(updatePostById);
 
 
 module.exports = postRouter;

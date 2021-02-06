@@ -20,8 +20,9 @@ function getAllPosts(req , res){
         })        
 }
 function getPostById(req , res){
-    const pid = req.params.pid;
-    const sql = `SELECT * FROM post_table WHERE pid = '${pid}' `;
+    const uid = req.params.uid;
+    const sql = `SELECT * FROM post_table WHERE uid = '${uid}' `;
+    console.log(sql);
     connection.query(sql , function(error , data){
         if(error){
             res.json({

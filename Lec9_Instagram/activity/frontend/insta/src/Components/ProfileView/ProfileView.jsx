@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./ProfileView.css"
 import axios from "axios";
+import { uid } from '../../auth';
 
 class ProfileView extends Component {
     //local state()
@@ -19,13 +20,14 @@ class ProfileView extends Component {
         // pw: "123456789"
         // uid: "0174eac2-c136-40be-8a0b-038aeb40cd64"
         // username: "blackwidow"
+        
         let user;
-        axios.get("/api/user/0174eac2-c136-40be-8a0b-038aeb40cd64").then( obj =>{
+        axios.get(`/api/user/${uid}`).then( obj =>{
              console.log(obj);
              user = obj.data.data[0];
          })
          .then( () =>{
-             return axios.get("/api/request/suggestions/0174eac2-c136-40be-8a0b-038aeb40cd64");
+             return axios.get(`/api/request/suggestions/${uid}`);
          })
          .then( obj =>{
              let suggestions = obj.data.suggestions;

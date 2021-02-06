@@ -1,26 +1,29 @@
 const mysql = require("mysql");
 const { HOST, USER, PASSWORD, DB_NAME } = require("../config/secrets");
 
-
 //database connection
-const connection = mysql.createConnection({
-  host     : HOST,
-  user     : USER,
-  password : PASSWORD,
-  database : DB_NAME
-});
- 
-connection.connect();
- 
-// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results[0].solution);
-// });
+let connection; 
 
-// const sql = `INSERT INTO user_table`
-// connection.query("DESC user_table" , function(error , data){
-    //     console.log(data);
-    // })
+function handleDisconnect() {
+  connection = mysql.createConnection({
+    host: HOST,
+    user: USER,
+    password: PASSWORD,
+    database: DB_NAME,
+  });
+  
+  connection.connect();
+    
+  connection.on("error", function (err) {
+    console.log("db error", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      handleDisconnect(); 
+    } else {
+      throw err;
+    }
+  });
+}
+handleDisconnect();
 
-console.log("DB Connected !!");
+
 module.exports = connection;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Post from "../Post/Post";
 import axios from "axios";
+import { uid } from "../../auth";
 
 class Feeds extends Component {
   state = {
@@ -38,7 +39,7 @@ class Feeds extends Component {
       let formData = new FormData();
       formData.append('post' , file);
       formData.append('caption' , this.state.caption);
-      formData.append('uid' , '0174eac2-c136-40be-8a0b-038aeb40cd64');
+      formData.append('uid' , uid );
       axios.post("/api/post" , formData).then(obj =>{
         this.componentDidMount();
       })

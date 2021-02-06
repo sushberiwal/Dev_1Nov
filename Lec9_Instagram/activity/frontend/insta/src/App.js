@@ -5,6 +5,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import ProfileView from "./Components/ProfileView/ProfileView";
 import Setting from "./Components/Setting/Setting";
 import { BrowserRouter as Router , Route } from "react-router-dom";
+import Profile from "./Components/Profile/Profile";
 function App() {
   return (
     <Router>
@@ -19,7 +20,7 @@ function App() {
         </Route>
 
         <Route path = "/profile" exact>
-          <h1>Profile page</h1>
+          <Profile />
         </Route>
 
         <Route path ="/settings" exact>
