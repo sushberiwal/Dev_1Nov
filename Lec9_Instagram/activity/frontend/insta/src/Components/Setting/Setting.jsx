@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { Component } from "react";
 import "./Setting.css";
+import { uid } from '../../auth';
+
 
 class Setting extends Component {
   state = {
@@ -26,7 +28,7 @@ class Setting extends Component {
   }
 
   onCancelHandler = () =>{
-    axios.get("/api/user/0174eac2-c136-40be-8a0b-038aeb40cd64").then((obj) => {
+    axios.get(`/api/user/${uid}`).then((obj) => {
         let user = obj.data.data[0];
         console.log(user);
         this.setState({
@@ -49,7 +51,7 @@ class Setting extends Component {
     formData.append('email' , this.state.user.email);
     formData.append('pw' , this.state.user.pw);
 
-    axios.patch("/api/user/0174eac2-c136-40be-8a0b-038aeb40cd64" , formData).then(obj =>{
+    axios.patch(`/api/user/${uid}` , formData).then(obj =>{
       this.componentDidMount();
     })
   }
@@ -65,7 +67,7 @@ class Setting extends Component {
   }
 
   componentDidMount() {
-    axios.get("/api/user/0174eac2-c136-40be-8a0b-038aeb40cd64").then((obj) => {
+    axios.get(`/api/user/${uid}`).then((obj) => {
       let user = obj.data.data[0];
       console.log(user);
       this.setState({

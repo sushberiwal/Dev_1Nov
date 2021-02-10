@@ -20,16 +20,27 @@ class Post extends Component {
 
     // 3. component did Mount `
     componentDidMount(){
-        axios.get(`/api/user/${this.props.post.uid}`).then(obj =>{
-            let user = obj.data.data[0];
-            console.log(user);
+        if(this.props.user){
+            let user = this.props.user;
             this.setState({
                 username:user.username,
                 userImage : user.pimage,
                 postImage:this.props.post.postImage ,
                 caption : this.props.post.caption
             })
-        })
+        }
+        else{
+            axios.get(`/api/user/${this.props.post.uid}`).then(obj =>{
+                let user = obj.data.data[0];
+                console.log(user);
+                this.setState({
+                    username:user.username,
+                    userImage : user.pimage,
+                    postImage:this.props.post.postImage ,
+                    caption : this.props.post.caption
+                })
+            })
+        }
     } 
 
     // 2. render function is called

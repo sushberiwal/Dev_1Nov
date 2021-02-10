@@ -5,14 +5,14 @@ const { HOST, USER, PASSWORD, DB_NAME } = require("../config/secrets");
 let connection; 
 
 function handleDisconnect() {
-  connection = mysql.createConnection({
+  connection = mysql.createPool({
     host: HOST,
     user: USER,
     password: PASSWORD,
     database: DB_NAME,
   });
   
-  connection.connect();
+  // connection.connect();
     
   connection.on("error", function (err) {
     console.log("db error", err);
