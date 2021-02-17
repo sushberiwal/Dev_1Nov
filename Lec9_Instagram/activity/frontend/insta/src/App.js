@@ -7,22 +7,41 @@ import Setting from "./Components/Setting/Setting";
 import { BrowserRouter as Router , Redirect, Route } from "react-router-dom";
 import Profile from "./Components/Profile/Profile";
 import Login from "./Components/Login/Login.jsx";
+import axios from 'axios';
 
 
 class App extends Component {
   state = { 
-    isAuth : true
+    isAuth : false ,
+    uid : null
   }
 
   login = () =>{
-    this.setState({
-      isAuth:true
-    })
+    // this.setState({
+    //   isAuth:true
+    // })
+    window.location = "/auth/google";
   }
 
   logout = () => {
     this.setState({
-      isAuth : false
+      isAuth : false ,
+      uid:null
+    })
+  }
+
+  // first time aaunga
+  componentDidMount(){
+    // check if already logged in !!!
+    axios.get("/auth/checkAuth").then( res => {
+      let isAuth = res.data.isAuth;
+      let uid = res.data.user.uid;
+      this.setState({
+        isAuth , 
+        uid
+      })
+    }).catch(err =>{
+      console.log(err);
     })
   }
   
@@ -34,20 +53,19 @@ class App extends Component {
   
           <Route path="/" exact>
           {this.state.isAuth ? <div className="home-view">
-            <Feeds />
-            <ProfileView />
+            <Feeds uid={this.state.uid} />
+            <ProfileView uid={this.state.uid}/>
           </div> : <Redirect to="/login"/> }
           </Route>
   
           <Route path = "/profile" exact>
-            {this.state.isAuth ? <Profile /> : <Redirect to="/login" /> }
+            {this.state.isAuth ? <Profile uid={this.state.uid}/> : <Redirect to="/login" /> }
           </Route>
   
           <Route path ="/settings" exact>
-            {this.state.isAuth ? <Setting /> : <Redirect to="/login" /> }
+            {this.state.isAuth ? <Setting uid={this.state.uid} /> : <Redirect to="/login" /> }
           </Route>
-
-
+          
           <Route path="/login" exact>
             {this.state.isAuth ? <Redirect to="/" /> : <Login login={this.login} /> }
           </Route>

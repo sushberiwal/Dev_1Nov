@@ -58,16 +58,16 @@ function updateUserById(req, res) {
   const uid = req.params.uid;
   const updateObject = req.body;
   let sql = `UPDATE user_table SET `;
-  for (key in updateObject) {
-    sql += `${key} = '${updateObject[key]}' ,`;
-  }
   if(req.file){
     let pimage = req.file.destination + "/" + req.file.filename;
     // public/images/user/akjsbfasbhf.jpeg
     pimage = pimage.substring(7);
-    sql += ` pimage = '${pimage}' ` 
+    sql += ` pimage = '${pimage}' , ` 
   }
-  // sql = sql.substring(0, sql.length - 1);
+  for (key in updateObject) {
+    sql += `${key} = '${updateObject[key]}' ,`;
+  }
+  sql = sql.substring(0, sql.length - 1);
   sql += `WHERE uid = '${uid}'`;
   // UPDATE user_table
   // SET "name"="IRON MAN" "bio":"I am billionaire"

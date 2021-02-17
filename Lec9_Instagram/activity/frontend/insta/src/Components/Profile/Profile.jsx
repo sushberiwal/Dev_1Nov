@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import { uid } from '../../auth';
+// import { uid } from '../../auth';
 import Post from '../Post/Post';
 import "./Profile.css";
 
@@ -17,6 +17,7 @@ class Profile extends Component {
 
 
     componentDidMount(){
+        let uid = this.props.uid;
         let posts=[];
         let user={};
         let followingCount=0;

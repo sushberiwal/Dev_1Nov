@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Post from "../Post/Post";
 import axios from "axios";
-import { uid } from "../../auth";
+// import { uid } from "../../auth";
 
 class Feeds extends Component {
   state = {
@@ -34,6 +34,7 @@ class Feeds extends Component {
 
 
   onUploadHandler = () =>{
+    let uid = this.props.uid;
     if(this.fileInput.current.files){
       let file = this.fileInput.current.files[0];
       let formData = new FormData();

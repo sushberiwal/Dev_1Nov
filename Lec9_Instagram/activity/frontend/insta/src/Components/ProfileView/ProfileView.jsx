@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./ProfileView.css"
 import axios from "axios";
-import { uid } from '../../auth';
+// import { uid } from '../../auth';
 
 class ProfileView extends Component {
     //local state()
@@ -20,7 +20,7 @@ class ProfileView extends Component {
         // pw: "123456789"
         // uid: "0174eac2-c136-40be-8a0b-038aeb40cd64"
         // username: "blackwidow"
-        
+        let uid = this.props.uid;
         let user;
         axios.get(`/api/user/${uid}`).then( obj =>{
              console.log(obj);
@@ -52,7 +52,7 @@ class ProfileView extends Component {
                 </div>
                 <div className="suggestions">
                     Suggestions
-                    {this.state.suggestions.map( suggestion =>{
+                    { this.state.suggestions && this.state.suggestions.map( suggestion =>{
                         return (<div key = {suggestion.uid} className="suggestion-user">
                         <div className="suggestion-user-image">
                             <img src={suggestion.pimage} alt=""/>

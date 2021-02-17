@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import "./Setting.css";
-import { uid } from '../../auth';
+// import { uid } from '../../auth';
 
 
 class Setting extends Component {
@@ -28,6 +28,7 @@ class Setting extends Component {
   }
 
   onCancelHandler = () =>{
+    let uid = this.props.uid;
     axios.get(`/api/user/${uid}`).then((obj) => {
         let user = obj.data.data[0];
         console.log(user);
@@ -39,6 +40,7 @@ class Setting extends Component {
   }
 
   onSaveHandler = () =>{
+    let uid = this.props.uid;
     console.log(this.fileInput.current);
     let formData = new FormData();
     if(this.fileInput.current.files.length){
@@ -52,7 +54,27 @@ class Setting extends Component {
     formData.append('pw' , this.state.user.pw);
 
     axios.patch(`/api/user/${uid}` , formData).then(obj =>{
-      this.componentDidMount();
+      console.log("after save !!");
+      console.log(obj);
+      let userPromise = axios.get(`/api/user/${uid}`);
+      return userPromise;
+    }).then(obj =>{
+      let user = obj.data.data[0];
+      console.log(user);
+      let userObj = {
+        bio: user.bio ? user.bio : "",
+        email: user.email ? user.email : "",
+        isPublic: user.isPublic ? user.isPublic : "",
+        name: user.name ? user.name : "",
+        pimage: user.pimage ? user.pimage : "",
+        pw: user.pw ? user.pw :"",
+        uid: user.uid ? user.uid : "",
+        username: user.username ?  user.username:"",
+      }
+      this.setState({
+        user : userObj ,
+        disabled : true
+      });
     })
   }
 
@@ -67,11 +89,22 @@ class Setting extends Component {
   }
 
   componentDidMount() {
+    let uid = this.props.uid;
     axios.get(`/api/user/${uid}`).then((obj) => {
       let user = obj.data.data[0];
       console.log(user);
+      let userObj = {
+        bio: user.bio ? user.bio : "",
+        email: user.email ? user.email : "",
+        isPublic: user.isPublic ? user.isPublic : "",
+        name: user.name ? user.name : "",
+        pimage: user.pimage ? user.pimage : "",
+        pw: user.pw ? user.pw :"",
+        uid: user.uid ? user.uid : "",
+        username: user.username ?  user.username:"",
+      }
       this.setState({
-        user : user ,
+        user : userObj ,
         disabled : true
       });
     });

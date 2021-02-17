@@ -43,7 +43,7 @@ passport.use(
     {
       clientID: CLIENT_ID,
       clientSecret: CLIENT_PW,
-      callbackURL: "http://localhost:4000/auth/callback",
+      callbackURL: "http://localhost:3000/auth/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
@@ -102,27 +102,29 @@ app.get("/auth/google",  passport.authenticate('google' , {scope:['email' , 'pro
 
 
 app.get("/auth/callback" ,  passport.authenticate('google')  , function(req , res){
-    res.send("USER AUTHENTICATED");
-    console.log(req.user);
+    // res.send("USER AUTHENTICATED");
+    // console.log(req.user);
+    res.redirect("http://localhost:3001/");
 })
 
 
-function checkAuth(req , res , next){
+
+
+app.get("/auth/checkAuth" , function checkAuth(req , res){
     if(req.user){
         // user is logged in
-        next();
+        res.json({
+            isAuth: true ,
+            user : req.user
+        })
     }else{
-        // user not logged in
-        res.send("YOU ARE NOT LOGGED IN !!!");
+        res.json({
+            isAuth:false
+        })
     }   
-
-}
-
-app.get("/profile" , checkAuth , function(req , res){
-    res.send(`WELCOME TO PROFILE PAGE ${req.user.name}`);
 })
 
 
-app.listen(4000, function () {
-  console.log("App is listening at port 4000 !!");
+app.listen(3000, function () {
+  console.log("App is listening at port 3000 !!");
 });
