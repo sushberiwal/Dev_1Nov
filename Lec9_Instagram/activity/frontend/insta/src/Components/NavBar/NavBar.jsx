@@ -12,20 +12,33 @@ class NavBar extends Component {
             <img src="./logo.png" alt="" />
           </div>
         </Link>
-        <div className="nav search-box">
-          <input type="text" placeholder="Search" />
-        </div>
-        <div className="nav links">
-          <Link to="/">
-            <div className="home">Home</div>
-          </Link>
-          <Link to="/profile">
-            <div className="profile">Profile</div>
-          </Link>
-          <Link to="/settings">
-            <div className="profile">Settings</div>
-          </Link>
-        </div>
+        {this.props.isAuth ? (
+          <React.Fragment>
+            <div className="nav search-box">
+              <input type="text" placeholder="Search" />
+            </div>
+            <div className="nav links">
+              <Link to="/">
+                <div className="home">Home</div>
+              </Link>
+              <Link to="/profile">
+                <div className="profile">Profile</div>
+              </Link>
+              <Link to="/settings">
+                <div className="profile">Settings</div>
+              </Link>
+              <Link to="/login">
+                <div className="logout" onClick = {this.props.logout}>Logout</div>
+              </Link>
+            </div>
+          </React.Fragment>
+        ) : (
+          <div className="nav links">
+            <Link to="/login">
+              <div className="login">Login</div>
+            </Link>
+          </div>
+        )}
       </div>
     );
   }
